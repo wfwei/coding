@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <queue>
+#include <stack>
 
 using namespace std;
 
@@ -8,6 +9,8 @@ struct Node{
   Node* pleft;
   Node* pright;
 };
+
+typedef struct Node * Tree;
 
 Node* reconstruct(int* preorder, int* inorder, int length){
   Node* root = new Node();
@@ -56,22 +59,63 @@ Node* construct2(int* inorder, int *postorder, int length){
   return reconstruct2(inorder, postorder, length);
 }
 
-void preTraverse(Node* root){
+void preTraverse(Tree root){
   if(root!=NULL){
     printf("%d ", root->nvalue);
     preTraverse(root->pleft);
     preTraverse(root->pright); }
 }
 
-void inTraverse(Node* root){
+void preTraverse2(Tree root){
+  stack<Tree> st;
+  Node* node = root;
+  while(node!=NULL){
+    printf("%d ", node->nvalue);
+    st.push(node);
+    if(node->pleft!=NULL)
+      node = node->pleft;
+    else{
+      while(!st.empty()){
+        node = st.pop();
+        node = node->right;
+        if(node!=NULL){
+          break;
+        }
+      }
+    }
+  }
+
+}
+
+
+void inTraverse(Tree root){
   if(root!=NULL){
     inTraverse(root->pleft);
     printf("%d ", root->nvalue);
     inTraverse(root->pright);
   }
 }
+void inTraverse2(Tree root){
+  stack<Node *> st;
+  Node * node = root;
+  while(node!=NULL){
+    st.push(node);
+    if(node->pleft!=NULL)
+      node = node->pleft;
+    else{
+      while(!st.empty()){
+        node = st.pop();
+        printf("%d ", node->nvalue);
+        node = node->right;
+        if(node!=NULL){
+          break;
+        }
+      }
+    }
+  }
+}
 
-void postTraverse(Node* root){
+void postTraverse(Tree root){
   if(root!=NULL){
     postTraverse(root->pleft);
     postTraverse(root->pright);
@@ -79,7 +123,7 @@ void postTraverse(Node* root){
   }
 }
 /*
-void CengciTraverse(Node* root){
+void CengciTraverse(Tree root){
   queue<Node *> nq;
   Node* cur;
   nq.push(root);
@@ -93,7 +137,7 @@ void CengciTraverse(Node* root){
   }
 }
 */
-void traverse(Node* root){
+void traverse(Tree root){
   printf("\npre-order:");
   preTraverse(root);
   printf("\nin-order:");
@@ -104,7 +148,7 @@ void traverse(Node* root){
   //CengciTraverse(root);
 }
 
-void mirrorTree(Node* root){
+void mirrorTree(Tree root){
   if(root==NULL)
     return;
   Node* tmp = root->pleft;
@@ -119,8 +163,8 @@ int main(){
   int pre[]={1, 2, 4, 7, 3, 5, 6, 8};
   int in[]={4, 7, 2, 1, 5, 3, 8, 6};
   int post[]={7, 4, 2, 5, 8, 6, 3, 1};
-  Node* root1 = construct(pre, in, 8);
-  Node* root2 = construct2(in, post, 8);
+  Tree root1 = construct(pre, in, 8);
+  Tree root2 = construct2(in, post, 8);
   mirrorTree(root2);
   traverse(root1);
   traverse(root2);
