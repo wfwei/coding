@@ -1,4 +1,4 @@
-/* *
+﻿/* *
  * judge if n^1/2 is integer
  * */
 #include<stdio.h>
