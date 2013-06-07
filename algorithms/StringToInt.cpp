@@ -26,8 +26,8 @@ int StrToInt(const char* str)
     return val*pos;
 }
 
-int main(){
-  printf("%d\n", StrToInt("2147483647"));
-  printf("%d\n", StrToInt("-2147483648"));
-  printf("%d\n", StrToInt("2147483648"));
-}
+//int main(){
+//  printf("%d\n", StrToInt("2147483647"));
+//  printf("%d\n", StrToInt("-2147483648"));
+//  printf("%d\n", StrToInt("2147483648"));
+//}
