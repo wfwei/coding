@@ -32,7 +32,7 @@ int StrToInt(const char* str)
 int StrToInt1(const char* str)
 {
     long long int val=0, max=1;
-    int i=0, pos=1;
+    int i=0, pos=1, sign=1;
     while(str[i]==' ' || str[i]=='\t'){
         i++;
     }
