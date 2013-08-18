@@ -1,7 +1,7 @@
 public class Test {
 
     public int firstMissingPositive(int[] A) {
-		int MAX = 1000000;
+		int MAX = A.length+1;
 		java.util.BitSet s = new java.util.BitSet(MAX);
 		for (int a : A) {
 			if(a>0)
