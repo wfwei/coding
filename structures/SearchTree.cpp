@@ -72,7 +72,7 @@ SearchTree Delete(int val, SearchTree root){
     printf("Element(%d) not found!!!", val);
   else{
     if(root->val>val)
-      Detelte(val, root->right);
+      Delete(val, root->right);
     else if(root->val<val)
       Delete(val, root->left);
     else{
